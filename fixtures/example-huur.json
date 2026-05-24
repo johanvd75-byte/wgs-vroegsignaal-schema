@@ -1,0 +1,45 @@
+{
+  "signaalId": "WC-2026-000123",
+  "signaalDatum": "2026-05-24",
+  "signaalPartij": {
+    "naam": "Woningcorporatie De Voorbeeldhof",
+    "type": "woningcorporatie",
+    "kvk": "12345678"
+  },
+  "bron": "primair",
+  "inwoner": {
+    "voorletters": "J.A.",
+    "tussenvoegsel": "de",
+    "achternaam": "Voorbeeld",
+    "geboortedatum": "1985-03-12",
+    "telefoon": "+31612345678",
+    "email": "j.devoorbeeld@example.nl"
+  },
+  "adres": {
+    "straat": "Voorbeeldstraat",
+    "huisnummer": 42,
+    "huisnummerToevoeging": "A",
+    "postcode": "1011AB",
+    "woonplaats": "Amsterdam",
+    "gemeente": "Amsterdam"
+  },
+  "vordering": {
+    "bedragOpenstaand": 1450.75,
+    "valuta": "EUR",
+    "vorderingType": "huur",
+    "vervaldatumEerste": "2026-03-01",
+    "vervaldatumLaatste": "2026-05-01",
+    "termijnen": 3,
+    "incassoFase": "minnelijk",
+    "betalingsregelingAangeboden": true,
+    "betalingsregelingGeaccepteerd": false
+  },
+  "context": {
+    "contactPogingen": 4,
+    "laatsteContact": "2026-05-10",
+    "huishoudenType": "gezin",
+    "kinderenInHuishouden": true,
+    "opmerking": "Bewoner reageert niet op brief en e-mail; signaal voor warme overdracht naar gemeente."
+  },
+  "toestemmingGedeeld": false
+}

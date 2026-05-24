@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fynqo/wgs-vroegsignaal-schema/schemas/inwonersignaal.schema.json",
+  "title": "WGS Vroegsignaal — Inwonersignaal",
+  "description": "JSON Schema voor een vroegsignaal-record onder de Wet gemeentelijke schuldhulpverlening (Wgs). Een signaalpartij (woningcorporatie, energieleverancier, drinkwaterbedrijf, zorgverzekeraar) levert een inwonersignaal aan de gemeente bij betalingsachterstand. Velden volgen het NVVK Convenant Vroegsignalering (publiek format, 2021+).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "signaalId",
+    "signaalDatum",
+    "signaalPartij",
+    "bron",
+    "inwoner",
+    "adres",
+    "vordering"
+  ],
+  "properties": {
+    "signaalId": {
+      "type": "string",
+      "description": "Unieke identifier van het signaal binnen de signaalpartij.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "signaalDatum": {
+      "type": "string",
+      "format": "date",
+      "description": "Datum waarop het signaal is gegenereerd (ISO 8601, YYYY-MM-DD)."
+    },
+    "signaalPartij": {
+      "type": "object",
+      "description": "Organisatie die het signaal aanlevert.",
+      "required": ["naam", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "naam": { "type": "string", "minLength": 1 },
+        "type": {
+          "type": "string",
+          "enum": [
+            "woningcorporatie",
+            "energieleverancier",
+            "drinkwaterbedrijf",
+            "zorgverzekeraar"
+          ]
+        },
+        "kvk": {
+          "type": "string",
+          "pattern": "^[0-9]{8}$",
+          "description": "8-cijferig KvK-nummer."
+        }
+      }
+    },
+    "bron": {
+      "type": "string",
+      "enum": ["primair", "secundair"],
+      "description": "Primair = eerste betalingsachterstand, secundair = herhaalsignaal."
+    },
+    "inwoner": {
+      "type": "object",
+      "description": "Identificerende gegevens van de inwoner. BSN is optioneel; conform AVG zo min mogelijk verwerken.",
+      "additionalProperties": false,
+      "required": ["achternaam"],
+      "properties": {
+        "voorletters": { "type": "string", "maxLength": 16 },
+        "tussenvoegsel": { "type": "string", "maxLength": 16 },
+        "achternaam": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "geboortedatum": { "type": "string", "format": "date" },
+        "bsn": {
+          "type": "string",
+          "pattern": "^[0-9]{9}$",
+          "description": "BSN — alleen aanleveren als grondslag (Wgs art. 3) van toepassing is."
+        },
+        "telefoon": { "type": "string", "maxLength": 32 },
+        "email": { "type": "string", "format": "email" }
+      }
+    },
+    "adres": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["postcode", "huisnummer", "woonplaats"],
+      "properties": {
+        "straat": { "type": "string", "maxLength": 128 },
+        "huisnummer": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99999
+        },
+        "huisnummerToevoeging": { "type": "string", "maxLength": 16 },
+        "postcode": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{3}\\s?[A-Za-z]{2}$",
+          "description": "Nederlandse postcode, met of zonder spatie."
+        },
+        "woonplaats": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "gemeente": { "type": "string", "maxLength": 128 }
+      }
+    },
+    "vordering": {
+      "type": "object",
+      "description": "Aard en omvang van de betalingsachterstand.",
+      "additionalProperties": false,
+      "required": ["bedragOpenstaand", "valuta", "vorderingType"],
+      "properties": {
+        "bedragOpenstaand": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Totaal openstaand bedrag in valuta-eenheden (geen cents)."
+        },
+        "valuta": {
+          "type": "string",
+          "enum": ["EUR"],
+          "default": "EUR"
+        },
+        "vorderingType": {
+          "type": "string",
+          "enum": ["huur", "energie", "water", "zorgverzekering"]
+        },
+        "vervaldatumEerste": { "type": "string", "format": "date" },
+        "vervaldatumLaatste": { "type": "string", "format": "date" },
+        "termijnen": { "type": "integer", "minimum": 1 },
+        "incassoFase": {
+          "type": "string",
+          "enum": ["minnelijk", "aanmaning", "deurwaarder", "WSNP", "MSNP"]
+        },
+        "betalingsregelingAangeboden": { "type": "boolean" },
+        "betalingsregelingGeaccepteerd": { "type": "boolean" }
+      }
+    },
+    "context": {
+      "type": "object",
+      "description": "Optionele context die de gemeente helpt bij triage.",
+      "additionalProperties": false,
+      "properties": {
+        "contactPogingen": { "type": "integer", "minimum": 0 },
+        "laatsteContact": { "type": "string", "format": "date" },
+        "huishoudenType": {
+          "type": "string",
+          "enum": ["alleenstaand", "samenwonend", "gezin", "onbekend"]
+        },
+        "kinderenInHuishouden": { "type": "boolean" },
+        "opmerking": { "type": "string", "maxLength": 1024 }
+      }
+    },
+    "toestemmingGedeeld": {
+      "type": "boolean",
+      "description": "True als de inwoner expliciet toestemming heeft gegeven voor delen van uitgebreide gegevens. False = alleen wettelijke grondslag (Wgs art. 3)."
+    }
+  }
+}

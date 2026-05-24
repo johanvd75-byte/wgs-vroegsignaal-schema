@@ -1,0 +1,33 @@
+{
+  "signaalId": "ENERGY-2026-99812",
+  "signaalDatum": "2026-05-24",
+  "signaalPartij": {
+    "naam": "Voorbeeld Energie BV",
+    "type": "energieleverancier",
+    "kvk": "87654321"
+  },
+  "bron": "secundair",
+  "inwoner": {
+    "voorletters": "M.",
+    "achternaam": "Test",
+    "geboortedatum": "1972-11-08"
+  },
+  "adres": {
+    "straat": "Teststraat",
+    "huisnummer": 7,
+    "postcode": "3511 AB",
+    "woonplaats": "Utrecht",
+    "gemeente": "Utrecht"
+  },
+  "vordering": {
+    "bedragOpenstaand": 312.40,
+    "valuta": "EUR",
+    "vorderingType": "energie",
+    "vervaldatumEerste": "2026-02-15",
+    "termijnen": 2,
+    "incassoFase": "aanmaning",
+    "betalingsregelingAangeboden": false,
+    "betalingsregelingGeaccepteerd": false
+  },
+  "toestemmingGedeeld": false
+}

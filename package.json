@@ -1,0 +1,45 @@
+{
+  "name": "@fynqo/wgs-vroegsignaal-schema",
+  "version": "0.1.0",
+  "description": "JSON Schema (AJV-compatible) voor vroegsignaal-bestanden onder de Wet gemeentelijke schuldhulpverlening (Wgs). Format gebaseerd op het NVVK Convenant Vroegsignalering.",
+  "keywords": [
+    "wgs",
+    "vroegsignalering",
+    "schuldhulp",
+    "schuldhulpverlening",
+    "gemeente",
+    "nvvk",
+    "json-schema",
+    "ajv",
+    "fynqo"
+  ],
+  "main": "index.js",
+  "files": [
+    "schemas",
+    "fixtures",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": {
+    "name": "Fynqo",
+    "url": "https://fynqo.app",
+    "email": "info@fynqo.app"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fynqo/wgs-vroegsignaal-schema.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fynqo/wgs-vroegsignaal-schema/issues"
+  },
+  "homepage": "https://fynqo.app/feiten/wat-is-wgs-vroegsignalering",
+  "peerDependencies": {
+    "ajv": "^8.0.0",
+    "ajv-formats": "^3.0.0"
+  }
+}
